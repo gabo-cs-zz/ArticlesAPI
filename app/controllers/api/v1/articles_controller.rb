@@ -1,10 +1,15 @@
-module Api
-  module V1
-    class ArticlesController < ApplicationController
-      def index
-        articles = Article.select(:id, :title, :body)
-        render json: { status: 'SUCCESS', message: 'Loaded articles', data: articles }, status: 200
-      end
-    end
+class Api::V1::ArticlesController < ApiController
+  before_action :set_article, only: [:show]
+  def index
+    @articles = Article.all
   end
+  
+  def show
+  end
+  
+  private
+  def set_article
+    @article = Article.find(params[:id])
+  end
+  
 end
