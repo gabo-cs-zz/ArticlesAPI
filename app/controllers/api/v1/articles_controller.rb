@@ -1,5 +1,5 @@
 class Api::V1::ArticlesController < ApiController
-  before_action :set_article, only: [:show, :destroy]
+  before_action :set_article, only: [:show, :update, :destroy]
   def index
     @articles = Article.all
   end
@@ -10,6 +10,14 @@ class Api::V1::ArticlesController < ApiController
   def create
     @article = Article.new(article_params)
     if @article.save
+      render :show
+    else
+      render json: {data: article.errors, status: :unprocessable_entity }
+    end
+  end
+  
+  def update
+    if @article.update
       render :show
     else
       render json: {data: article.errors, status: :unprocessable_entity }
