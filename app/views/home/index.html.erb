@@ -1,0 +1,36 @@
+<html>
+<head>
+  <title>JSON API</title>
+  <style>
+    .center {
+      margin-top: 3em;
+      text-align: center;
+    }
+    
+    #btn {
+      background-color: navy; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+    }
+  </style>
+</head>
+<body>
+  <div class="center">
+    <p>Consuming the API here</p>
+    <button id="btn">FETCH DATA</button>
+  </div>
+<script>
+  var btn = document.getElementById("btn");
+  btn.addEventListener("click", function(){
+    var request = new XMLHttpRequest();
+    request.open('GET', 'https://rails-gabrielomar2809547411.codeanyapp.com/api/v1/articles')
+    request.onload = function(){
+      var data = JSON.parse(request.responseText);
+      console.log(data);
+    };
+    request.send();  
+  });
+</script>
+</body>
+</html>
